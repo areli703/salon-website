@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Generator - Social Media</title>
+    <link href="output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="flex w-20 flex-col justify-between border-e bg-white">
+            <!-- Sidebar content here -->
+        </div>
+        <!-- Main content area -->
+        <div class="flex flex-1 flex-col p-6">
+            <header class="flex items-center justify-between bg-white p-6 rounded shadow">
+                <h1 class="text-2xl font-bold">AI Content Generator - Social Media</h1>
+                <button id="generate-button" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-transform duration-300">Generate</button>
+            </header>
+            <main class="flex flex-1 flex-col mt-6 space-y-4">
+                <section class="flex flex-col p-6 bg-white rounded shadow">
+                    <h2 class="text-xl font-semibold mb-4">Input Prompt</h2>
+                    <textarea class="w-full p-4 border rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none" rows="4" placeholder="Enter your social media prompt here..."></textarea>
+                </section>
+                <section class="flex flex-col p-6 bg-white rounded shadow">
+                    <h2 class="text-xl font-semibold mb-4">Generated Social Media Content</h2>
+                    <div id="output" class="w-full p-4 border rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none bg-gray-50 min-h-[200px]">
+                        <p class="text-gray-700">Generated content will appear here...</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generate-button').addEventListener('click', async () => {
+            console.log('Button clicked');
+            const prompt = document.querySelector('textarea').value;
+            const type = document.querySelector('h1').textContent.split(' - ')[1];
+            const outputElement = document.getElementById('output');
+
+            // Show loading indicator
+            outputElement.innerHTML = '<div class="flex justify-center items-center"><div class="loader"></div></div>';
+
+            console.log(`Sending request with prompt: ${prompt}, type: ${type}`); // Debug logging
+
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt, type })
+                });
+
+                const data = await response.json();
+                console.log('Received response:', data); // Debug logging
+
+                if (data.choices && data.choices.length > 0) {
+                    outputElement.innerHTML = data.choices[0].message.content;
+                } else {
+                    outputElement.innerHTML = 'No content generated.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                outputElement.innerHTML = 'An error occurred.';
+            }
+        });
+    </script>
+</body>
+</html>

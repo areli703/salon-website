@@ -121,6 +121,7 @@
 
     <script>
         document.getElementById('generate-button').addEventListener('click', async () => {
+            console.log('Button clicked');
             const prompt = document.querySelector('textarea').value;
             const type = document.querySelector('h1').textContent.split(' - ')[1];
             const outputElement = document.getElementById('output');
@@ -143,7 +144,7 @@
                 console.log('Received response:', data); // Debug logging
 
                 if (data.choices && data.choices.length > 0) {
-                    outputElement.innerHTML = `<img src="${data.choices[0].message.content}" alt="Generated Image" />`;
+                    outputElement.innerHTML = data.choices[0].message.content;
                 } else {
                     outputElement.innerHTML = 'No content generated.';
                 }

@@ -3,32 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Content Generator</title>
+    <title>AI Content Generator - Blog Generation</title>
     <link href="output.css" rel="stylesheet">
-    <style>
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 4px solid #3498db;
-            width: 40px;
-            height: 40px;
-            -webkit-animation: spin 2s linear infinite; /* Safari */
-            animation: spin 2s linear infinite;
-        }
-
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
-
     <div class="flex h-screen">
         <!-- Sidebar -->
         <div class="flex w-20 flex-col justify-between border-e bg-white">
@@ -46,8 +24,7 @@
                                         d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                                <span
-                                    class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Blog</span>
+                                <span class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Blog</span>
                             </a>
                         </div>
                         <ul class="space-y-1 border-t border-gray-100 pt-4">
@@ -59,8 +36,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
-                                    <span
-                                        class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Social</span>
+                                    <span class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Social</span>
                                 </a>
                             </li>
                             <li>
@@ -71,8 +47,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                                     </svg>
-                                    <span
-                                        class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Image</span>
+                                    <span class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Image</span>
                                 </a>
                             </li>
                         </ul>
@@ -88,8 +63,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
-                        <span
-                            class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Logout</span>
+                        <span class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">Logout</span>
                     </button>
                 </form>
             </div>
@@ -99,14 +73,12 @@
         <div class="flex flex-1 flex-col p-6">
             <header class="flex items-center justify-between bg-white p-6 rounded shadow">
                 <h1 class="text-2xl font-bold">AI Content Generator - Blog Generation</h1>
-                <button id="generate-button"
-                    class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-transform duration-300">Generate</button>
+                <button id="generate-button" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-lg transform hover:scale-105 transition-transform duration-300">Generate</button>
             </header>
             <main class="flex flex-1 flex-col mt-6 space-y-4">
                 <section class="flex flex-col p-6 bg-white rounded shadow">
                     <h2 class="text-xl font-semibold mb-4">Input Prompt</h2>
-                    <textarea class="w-full p-4 border rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                        rows="4" placeholder="Enter your blog prompt here..."></textarea>
+                    <textarea class="w-full p-4 border rounded-md focus:ring-2 focus:ring-purple-500 focus:outline-none" rows="4" placeholder="Enter your blog prompt here..."></textarea>
                 </section>
                 <section class="flex flex-col p-6 bg-white rounded shadow">
                     <h2 class="text-xl font-semibold mb-4">Generated Blog Content</h2>
@@ -118,7 +90,6 @@
         </div>
     </div>
 
-    <!-- Script at the end of the body -->
     <script>
         document.getElementById('generate-button').addEventListener('click', async () => {
             console.log('Button clicked');
@@ -140,6 +111,10 @@
                     body: JSON.stringify({ prompt, type })
                 });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
                 const data = await response.json();
                 console.log('Received response:', data); // Debug logging
 
@@ -156,3 +131,4 @@
     </script>
 </body>
 </html>
+

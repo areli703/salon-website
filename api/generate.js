@@ -1,31 +1,26 @@
-const axios = require('axios');
-require('dotenv').config();
+const { PerplexityClient } = require('@perplexity/client');
 
-module.exports = async (req, res) => {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
+const perplexityClient = new PerplexityClient({
+  apiKey: process.env.PERPLEXITY_API_KEY,
+});
 
+
+app.post('/api/generate', async (req, res) => {
     const { prompt, type } = req.body;
-
+    console.log(`Received prompt: ${prompt}, type: ${type}`);
+  
     try {
-        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-            model: 'gpt-4',
-            messages: [
-                { role: 'system', content: `You are a helpful assistant specialized in generating ${type}.` },
-                { role: 'user', content: prompt }
-            ],
-            max_tokens: 1500,
-            temperature: 0.7,
-        }, {
-            headers: {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-            }
-        });
-
-        res.status(200).json(response.data);
+      const response = await perplexityClient.createCompletion({
+        model: 'gpt-4', // or any other Perplexity model you want to use
+        prompt: `You are a helpful assistant specialized in generating ${type}. ${prompt}`,
+        maxTokens: 1500,
+        temperature: 0.7,
+      });
+  
+      console.log('Perplexity API response:', response);
+      res.json(response);
     } catch (error) {
-        console.error('Error with OpenAI API request:', error.response ? error.response.data : error.message);
-        res.status(500).json({ error: 'An error occurred while generating content' });
+      console.error('Error with Perplexity API request:', error);
+      res.status(500).json({ error: 'An error occurred while generating content' });
     }
-};
+  });

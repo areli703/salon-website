@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
                 { role: 'system', content: `You are a helpful assistant specialized in generating ${type}.` },
                 { role: 'user', content: prompt }
             ],
-            max_tokens: 100,
+            max_tokens: 1500,
             temperature: 0.7,
         }, {
             headers: {

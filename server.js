@@ -1,10 +1,12 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors'); // Import the cors package
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(cors()); // Use cors middleware
 app.use(express.json());
 app.use(express.static('public')); // Serve static files from the 'public' directory
 

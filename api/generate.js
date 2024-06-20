@@ -1,5 +1,3 @@
-app.use('/api/generate', require('./api/generate'));
-
 const axios = require('axios');
 require('dotenv').config();
 
@@ -31,3 +29,4 @@ module.exports = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while generating content' });
     }
 };
+

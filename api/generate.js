@@ -1,3 +1,5 @@
+app.use('/api/generate', require('./api/generate'));
+
 const axios = require('axios');
 require('dotenv').config();
 

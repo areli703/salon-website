@@ -1,43 +1,22 @@
 const express = require('express');
-const axios = require('axios');
-const cors = require('cors'); // Import the cors package
-require('dotenv').config();
+const cors = require('cors');
+const dotenv = require('dotenv');
+const path = require('path');
+
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
-app.use(cors()); // Use cors middleware
+app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Serve static files from the 'public' directory
 
-app.post('/api/generate', async (req, res) => {
-    const { prompt, type } = req.body;
-    console.log(`Received prompt: ${prompt}, type: ${type}`); // Debug logging
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-    try {
-        const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-            model: 'gpt-4',
-            messages: [
-                { role: 'system', content: `You are a helpful assistant specialized in generating ${type}.` },
-                { role: 'user', content: prompt }
-            ],
-            max_tokens: 100,
-            temperature: 0.7,
-        }, {
-            headers: {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-            }
-        });
-
-        console.log('OpenAI API response:', response.data); // Debug logging
-        res.json(response.data);
-    } catch (error) {
-        console.error('Error with OpenAI API request:', error.response ? error.response.data : error.message);
-        res.status(500).json({ error: 'An error occurred while generating content' });
-    }
-});
+// API route
+app.use('/api/generate', require('./api/generate'));
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
-

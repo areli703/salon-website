@@ -1,24 +1,20 @@
 {
-  "name": "salon-website",
+  "name": "ai-content-generator",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:tailwind": "tailwindcss -i ./styles.css -o ./public/output.css --minify",
-    "build": "npm run build:tailwind"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "tailwindcss": "^3.4.4"
+    "build": "echo 'Using pre-built Tailwind CSS'"
   },
   "dependencies": {
     "axios": "^1.7.2",
-    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "openai": "^4.0.0"
+    "cors": "^2.8.5"
   },
-  "description": ""
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "shelljs": "^0.8.4"
+  }
 }
